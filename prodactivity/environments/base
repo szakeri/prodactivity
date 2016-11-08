@@ -20,8 +20,8 @@ RUN pip install f5-sdk
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-meta.git
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git
-RUN pip install pytest-cov
 RUN pip install git+https://github.com/zancas/prodactivity.git
+RUN pip install pytest-cov
 RUN git clone -b master https://github.com/zancas/dotfiles.git
 COPY prodactivity/entrypoints/base.sh /root/entrypoints/base.sh
 RUN chmod +x /root/entrypoints/base.sh
