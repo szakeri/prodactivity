@@ -9,7 +9,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ssh\
                                                       make\
                                                       git\
                                                       python\
-                                                      python-pip
+                                                      python-pip\
+                                                      docker.io
 RUN pip install --upgrade pip
 RUN pip install jinja2
 RUN pip install mock
