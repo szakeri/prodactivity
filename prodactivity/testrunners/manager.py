@@ -61,8 +61,9 @@ def _build_testrunner_container(project_dockerfile):
                     "--build-arg CONTROLLER_IPADDR={CONTROLLER_IPADDR} "
                     "-t {LOCALTAG} "
                     "-f {project_dockerfile} "
-                    ".".format(LOCALTAG=local_tag,
+                    "{ctxt}".format(LOCALTAG=local_tag,
                                project_dockerfile=project_dockerfile,
+                               ctxt=CTXT,
                                **os.environ)
                    )
     logger.debug(build_string)
