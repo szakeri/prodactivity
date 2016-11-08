@@ -1,0 +1,23 @@
+#! /usr/bin/env bash
+
+if [ "$1" == "upgrade" ]; then
+        sudo pip install --upgrade git+https://github.com/zancas/prodactivity.git
+    elif [ "$1" == "publish" ]; then
+        INSTALL_DIR=`python -c \\
+        'import os, prodactivity;print(\\
+            os.path.dirname(os.path.abspath(prodactivity.__file__)))'`
+        echo ${INSTALL_DIR}
+        echo ${USER}
+        echo `id -u -r ${USER}`
+        docker build --build-arg USER=${USER} \
+                     --build-arg USER_ID=`id -u -r ${USER}` \
+                     -t docker-registry.pdbld.f5net.com/prodactivity/${USER} \
+                     -f ${INSTALL_DIR}/environments/base ${INSTALL_DIR} \
+        && docker push docker-registry.pdbld.f5net.com/prodactivity/${USER}
+    else
+        docker run --user ${USER} -it -v ${HOME}:/home/${USER} \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v ${HOME}/.ssh/id_rsa_bldrgit:/home/$USER/ssh_keys/id_rsa_bldrgit \
+        -v ${HOME}/.ssh/id_rsa_testlab:/home/$USER/ssh_keys/id_rsa_testlab \
+        docker-registry.pdbld.f5net.com/prodactivity/${USER}:latest bash
+fi
