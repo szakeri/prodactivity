@@ -10,7 +10,7 @@ setup(
     license='Apache 2.0',
     url='https://github.com/F5Networks/f5-container-utils.git',
     packages=find_packages(),
-    scripts=['cli/develop'],
+    scripts=['cli/prodactivity'],
     install_requires=[
             'jinja2 >= 2.8, < 3'
         ]
