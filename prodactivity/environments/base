@@ -21,7 +21,6 @@ RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-meta.g
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git
 RUN date
-RUN pip install requests
 RUN pip install git+https://github.com/zancas/prodactivity.git
 RUN pip install pytest-cov
 RUN git clone -b master https://github.com/zancas/dotfiles.git
