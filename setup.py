@@ -8,7 +8,7 @@ setup(
     author='Za Wilgustus',
     author_email='za@f5.com',
     license='Apache 2.0',
-    url='https://github.com/F5Networks/f5-container-utils.git',
+    url='https://github.com/zancas/prodactivity.git',
     packages=find_packages(),
     scripts=['cli/prodactivity'],
     install_requires=[
