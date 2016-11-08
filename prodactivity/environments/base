@@ -17,6 +17,9 @@ RUN pip install mock
 RUN pip install pytest
 RUN pip install snakeviz
 RUN pip install f5-sdk
+RUN pip install git+git@bldr-git.int.lineratesystems.com:tools/pytest-meta.git
+RUN pip install git+git@bldr-git.int.lineratesystems.com:tools/pytest-symbols.git
+RUN pip install git+git@bldr-git.int.lineratesystems.com:tools/pytest-autolog.git
 RUN git clone -b master https://github.com/zancas/dotfiles.git
 COPY devcontainers/entrypoints/base.sh /root/entrypoints/base.sh
 RUN chmod +x /root/entrypoints/base.sh
