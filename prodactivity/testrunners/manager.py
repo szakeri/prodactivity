@@ -30,7 +30,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 logger.addHandler(logging.StreamHandler())
 
-CTXT = os.path.abspath(os.curdir)
+CTXT = os.path.abspath(__path__)
 REG_ID = 'docker-registry.pdbld.f5net.com/f5-openstack-test'
 TIMESTAMP = time.time()
 def render_dockerfile(**kwargs):
