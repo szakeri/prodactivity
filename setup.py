@@ -15,5 +15,5 @@ setup(
             'jinja2 >= 2.8, < 3'
         ],
     entry_points={'console_scripts':
-        ['prodact_contmanager=prodactivity.testrunners.manager:main']}
+        ['contbuilder_pradact=prodactivity.testrunners.manager:main']}
 )
