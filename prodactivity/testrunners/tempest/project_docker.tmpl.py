@@ -39,13 +39,10 @@ ENV TEMPEST_CONF=/etc/tempest/tempest.conf
 # Install pytest test-runner framework.
 RUN pip install --upgrade pip
 RUN pip install pytest
-COPY ./pytest-autolog ./pytest-autolog
-RUN pip install ./pytest-autolog
-COPY ./pytest-symbols ./pytest-symbols
-RUN pip install ./pytest-symbols
-COPY ./pytest-meta ./pytest-meta
-RUN pip install ./pytest-meta
 
+RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-meta.git
+RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git
+RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git
 # cloning tempest and F5 neutron-lbaas. Sanaz, why do we point at Mitaka?
 RUN git clone -b stable/mitaka https://github.com/F5Networks/neutron-lbaas.git 
 # Are the following steps necessary Sanaz? Why? Or Why not?
