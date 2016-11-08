@@ -3,7 +3,7 @@ eval `ssh-agent -s`
 for k in ~/ssh_keys/*; do
   [ -f $k ] && ssh-add $k
 done
-. ~/dotfiles/.bash_profile
+ln -sf ~/dotfiles/.bash_profile ~/.bashrc
 if [ ${#@} == 0 ]; then
   exec bash
 else

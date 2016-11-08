@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 RUN mkdir -p /root/devenv
-WORKDIR /root/devenv
+WORKDIR /root
 RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
     apt-get install -y apt-utils &&\
     apt-get upgrade -y
@@ -12,9 +12,12 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ssh\
                                                       python-pip
 RUN pip install --upgrade pip
 RUN pip install jinja2
-RUN git clone -b liberty https://github.com/F5Networks/f5-openstack-lbaasv2-driver.git
-RUN git clone -b master git@github.com:zancas/dotfiles.git
-WORKDIR /root/devenv/f5-openstack-lbaasv2-driver/systest
-COPY ./sshagent_entrypoint.sh /root/sshagent_entrypoint.sh
-RUN chmod +x /root/sshagent_entrypoint.sh
-ENTRYPOINT ["/root/sshagent_entrypoint.sh"]
+RUN pip install mock
+RUN pip install pytest
+RUN pip install snakeviz
+RUN pip install f5-sdk
+RUN git clone -b master https://github.com/zancas/dotfiles.git
+COPY devcontainers/entrypoints/base.sh /root/entrypoints/base.sh
+RUN chmod +x /root/entrypoints/base.sh
+WORKDIR /root/devenv
+ENTRYPOINT ["/root/entrypoints/base.sh"]
