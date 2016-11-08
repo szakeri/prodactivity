@@ -13,6 +13,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ssh\
 RUN pip install --upgrade pip
 RUN pip install jinja2
 RUN git clone -b liberty https://github.com/F5Networks/f5-openstack-lbaasv2-driver.git
+RUN git clone -b master git@github.com:zancas/dotfiles.git
 WORKDIR /root/devenv/f5-openstack-lbaasv2-driver/systest
 COPY ./sshagent_entrypoint.sh /root/sshagent_entrypoint.sh
 RUN chmod +x /root/sshagent_entrypoint.sh
