@@ -4,4 +4,4 @@ docker run -it -v `pwd`:/root/devenv \
     -v /var/run/docker.sock:/var/run/docker.sock \
     -v `pwd`/.ssh/id_rsa_bldrgit:/root/ssh_keys/id_rsa_bldrgit \
     -v `pwd`/.ssh/id_rsa_testlab:/root/ssh_keys/id_rsa_testlab \
-    docker-registry.pdbld.f5net.com/f5-openstack-test/devenvironments/base bash
+    docker-registry.pdbld.f5net.com/prodactivity/environments/base bash
