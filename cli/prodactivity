@@ -1,7 +1,19 @@
 #! /usr/bin/env bash
 
-docker run -it -v `pwd`:/root/devenv \
-    -v /var/run/docker.sock:/var/run/docker.sock \
-    -v `pwd`/.ssh/id_rsa_bldrgit:/root/ssh_keys/id_rsa_bldrgit \
-    -v `pwd`/.ssh/id_rsa_testlab:/root/ssh_keys/id_rsa_testlab \
-    docker-registry.pdbld.f5net.com/prodactivity/environments/base bash
+if [ "$1" == "publish" ]; then
+        echo ${USER}
+        echo `id -g ${USER}`
+        docker build --build-arg USER=${USER} --build-arg USER_ID=`id -g ${USER}` \
+                 -t docker-registry.pdbld.f5net.com/prodactivity/${USER} \
+                 -f ${HOME}/prodactivity/prodactivity/environments/base \
+                 ${HOME}/prodactivity/ && \
+        docker push docker-registry.pdbld.f5net.com/prodactivity/${USER}
+    elif [ "$1" == "install" ]; then
+        sudo pip install --upgrade ${HOME}/prodactivity
+    else
+        docker run --user ${USER} -it -v ${HOME}:${HOME} \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v ${HOME}/.ssh/id_rsa_bldrgit:/root/ssh_keys/id_rsa_bldrgit \
+        -v ${HOME}/.ssh/id_rsa_testlab:/root/ssh_keys/id_rsa_testlab \
+        docker-registry.pdbld.f5net.com/prodactivity/${USER}:latest bash
+fi
