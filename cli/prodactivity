@@ -9,7 +9,7 @@ if [ "$1" == "publish" ]; then
                  ${HOME}/prodactivity/ && \
         docker push docker-registry.pdbld.f5net.com/prodactivity/${USER}
     elif [ "$1" == "install" ]; then
-        sudo pip install --upgrade ${HOME}/prodactivity
+        sudo pip install --upgrade git+https://github.com/zancas/prodactivity.git
     else
         docker run --user ${USER} -it -v ${HOME}:/home/${USER} \
         -v /var/run/docker.sock:/var/run/docker.sock \

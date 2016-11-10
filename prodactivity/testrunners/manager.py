@@ -34,7 +34,7 @@ CTXT = os.path.abspath(os.path.dirname(__file__))
 REG_ID = 'docker-registry.pdbld.f5net.com/f5-openstack-test'
 TIMESTAMP = time.time()
 def render_dockerfile(**kwargs):
-    infname = join(CTXT, kwargs['test_type'], 'project_docker.tmpl.py')
+    infname = join(CTXT, kwargs['test_type'], 'project_docker.tmpl')
     outdir = join(CTXT, kwargs['test_type'], kwargs['project'])
     outfname = join(outdir, 'Dockerfile')
     logging.debug('outfname: {}'.format(outfname))

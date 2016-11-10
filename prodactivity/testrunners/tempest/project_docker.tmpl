@@ -60,7 +60,7 @@ https://bldr-git.int.lineratesystems.com/openstack/f5-os-testrunner-configs.git
 RUN mkdir -p /etc/tempest
 RUN cp -R ./f5-os-testrunner-configs/tempest/lbaasv2/* /etc/tempest/
 
-COPY ./tempest/set_tempest_config.sh.py \
+COPY ./tempest/set_tempest_config.sh \
 /home/buildbot/testrunner/set_tempest_config.sh
 
 RUN chmod +x ./set_tempest_config.sh
