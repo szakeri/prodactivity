@@ -1,10 +1,11 @@
 #! /usr/bin/env python
 
 from setuptools import setup, find_packages
+import prodactivity
 
 setup(
     name='prodactivity',
-    version='0.1.dev1',
+    version=prodactivity.__version__
     author='Za Wilgustus',
     author_email='za@f5.com',
     license='Apache 2.0',
