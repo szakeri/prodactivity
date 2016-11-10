@@ -13,7 +13,7 @@ if [ "$1" == "publish" ]; then
     else
         docker run --user ${USER} -it -v ${HOME}:${HOME} \
         -v /var/run/docker.sock:/var/run/docker.sock \
-        -v ${HOME}/.ssh/id_rsa_bldrgit:/root/ssh_keys/id_rsa_bldrgit \
-        -v ${HOME}/.ssh/id_rsa_testlab:/root/ssh_keys/id_rsa_testlab \
+        -v ${HOME}/.ssh/id_rsa_bldrgit:/$USER/ssh_keys/id_rsa_bldrgit \
+        -v ${HOME}/.ssh/id_rsa_testlab:/$USER/ssh_keys/id_rsa_testlab \
         docker-registry.pdbld.f5net.com/prodactivity/${USER}:latest bash
 fi
