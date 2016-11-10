@@ -8,9 +8,9 @@ if [ "$1" == "upgrade" ]; then
             os.path.dirname(os.path.abspath(prodactivity.__file__)))'`
         echo ${INSTALL_DIR}
         echo ${USER}
-        echo `id -u ${USER}`
+        echo `id -u -r ${USER}`
         docker build --build-arg USER=${USER} \
-                     --build-arg USER_ID=`id -g ${USER}` \
+                     --build-arg USER_ID=`id -u -r ${USER}` \
                      -t docker-registry.pdbld.f5net.com/prodactivity/${USER} \
                      -f ${INSTALL_DIR}/environments/base ${INSTALL_DIR} \
         && docker push docker-registry.pdbld.f5net.com/prodactivity/${USER}
