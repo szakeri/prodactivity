@@ -10,5 +10,3 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
     git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git\
     git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git\
     git+https://github.com/zancas/prodactivity.git
-COPY entrypoints/base.sh /tmp/entrypoint.sh
-RUN chmod 700 /tmp/entrypoint.sh
