@@ -4,24 +4,20 @@ ARG USER_ID
 ENV USER_ID=$USER_ID
 ARG USER
 ENV USER=$USER
-RUN useradd $USER -u $USER_ID -g sudo
-RUN echo $USER' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
     apt-get install -y apt-utils &&\
     apt-get upgrade -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ssh\
-                                                      make\
-                                                      git\
-                                                      python\
-                                                      python-pip\
-                                                      docker.io
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y\
+    ssh make git python python-pip docker.io sudo vim tmux
+RUN useradd $USER -u $USER_ID -g sudo
+RUN echo $USER' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN pip install --upgrade pip
 RUN pip install jinja2
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-meta.git
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git
 RUN pip install git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git
 RUN pip install git+https://github.com/zancas/prodactivity.git
-COPY prodactivity/entrypoints/base.sh /tmp/entrypoint.sh
+COPY entrypoints/base.sh /tmp/entrypoint.sh
 RUN chmod 700 /tmp/entrypoint.sh
 RUN chown $USER /tmp/entrypoint.sh
 WORKDIR /home/$USER
