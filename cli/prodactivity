@@ -9,13 +9,15 @@ ENV_DIR=${INSTALL_DIR}/environments
 if [ "$1" == "upgrade" ]; then
       sudo pip install --upgrade git+https://github.com/zancas/prodactivity.git
     elif [ "$1" == "basepublish" ]; then
-      docker build -t ${BASEIMAGE_REGID} -f ${ENV_DIR}/base ${INSTALL_DIR} \
+      docker build --no-cache\
+            -t ${BASEIMAGE_REGID}\
+            -f ${ENV_DIR}/base ${INSTALL_DIR}\
       && docker push ${BASEIMAGE_REGID}
     elif [ "$1" == "selfpublish" ]; then
       echo ${INSTALL_DIR}
       echo ${USER}
       echo `id -u -r ${USER}`
-      docker build --build-arg USER=${USER} \
+      docker build --no-cache --build-arg USER=${USER} \
                    --build-arg USER_ID=`id -u -r ${USER}` \
                    -t ${REGISTRY}/${USER} \
                    -f ${ENV_DIR}/user ${INSTALL_DIR} \
