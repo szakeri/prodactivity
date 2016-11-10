@@ -5,7 +5,7 @@ import prodactivity
 
 setup(
     name='prodactivity',
-    version=prodactivity.__version__
+    version=prodactivity.__version__,
     author='Za Wilgustus',
     author_email='za@f5.com',
     license='Apache 2.0',
