@@ -17,5 +17,7 @@ setup(
     entry_points={'console_scripts':
         ['contbuilder_pradact=prodactivity.testrunners.manager:main']},
     package_data ={'prodactivity':
-        ['testrunners/tempest/*']}
+        ['testrunners/tempest/*',
+         'environments/*',
+         'entrypoints/*']}
 )
