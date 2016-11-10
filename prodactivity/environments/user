@@ -4,10 +4,10 @@ ARG USER_ID
 ENV USER_ID=$USER_ID
 ARG USER
 ENV USER=$USER
-RUN useradd $USER -u $USER_ID -g sudo
-RUN echo $USER' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -y
-RUN chown $USER /tmp/entrypoint.sh
+RUN useradd $USER -u $USER_ID -g sudo &&\
+    echo $USER' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers &&\
+    DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -y &&\
+    chown $USER /tmp/entrypoint.sh &&\
 WORKDIR /home/$USER
 RUN chown -R $USER /home/$USER
 ENTRYPOINT ["/tmp/entrypoint.sh"]

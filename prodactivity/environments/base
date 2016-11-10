@@ -2,26 +2,13 @@ FROM ubuntu:16.10
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
     apt-get install -y apt-utils &&\
-    apt-get upgrade -y
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y emacs
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y mtr
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y ssh
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y make
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y git
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y python-pip
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y docker.io
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y sudo
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tmux
-RUN pip install --upgrade pip
-RUN pip install jinja2
-RUN pip install \
-    git+https://bldr-git.int.lineratesystems.com/tools/pytest-meta.git
-RUN pip install \
-    git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git
-RUN pip install \
-    git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git
-RUN pip install git+https://github.com/zancas/prodactivity.git
+    apt-get upgrade -y &&\
+ apt-get install -y\
+     emacs mtr ssh make git python python-pip docker.io sudo vim tmux &&\
+    pip install --upgrade pip jinja2\
+    git+https://bldr-git.int.lineratesystems.com/tools/pytest-meta.git\
+    git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git\
+    git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git\
+    git+https://github.com/zancas/prodactivity.git
 COPY entrypoints/base.sh /tmp/entrypoint.sh
 RUN chmod 700 /tmp/entrypoint.sh
