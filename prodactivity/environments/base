@@ -8,7 +8,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
     apt-get install -y apt-utils &&\
     apt-get upgrade -y
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y\
-    ssh make git python python-pip docker.io sudo vim tmux
+    man emacs mtr ssh make git python python-pip docker.io sudo vim tmux
 RUN useradd $USER -u $USER_ID -g sudo
 RUN echo $USER' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 RUN pip install --upgrade pip
