@@ -1,6 +1,8 @@
 #! /usr/bin/env bash
 
-if [ "$1" == "publish" ]; then
+if [ "$1" == "upgrade" ]; then
+        sudo pip install --upgrade git+https://github.com/zancas/prodactivity.git
+    elif [ "$1" == "publish" ]; then
         echo ${USER}
         echo `id -g ${USER}`
         docker build --build-arg USER=${USER} --build-arg USER_ID=`id -g ${USER}` \
@@ -8,8 +10,6 @@ if [ "$1" == "publish" ]; then
                  -f ${HOME}/prodactivity/prodactivity/environments/base \
                  ${HOME}/prodactivity/ && \
         docker push docker-registry.pdbld.f5net.com/prodactivity/${USER}
-    elif [ "$1" == "install" ]; then
-        sudo pip install --upgrade git+https://github.com/zancas/prodactivity.git
     else
         docker run --user ${USER} -it -v ${HOME}:/home/${USER} \
         -v /var/run/docker.sock:/var/run/docker.sock \
