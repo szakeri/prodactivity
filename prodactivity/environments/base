@@ -24,10 +24,6 @@ RUN pip install git+https://github.com/zancas/prodactivity.git
 COPY prodactivity/entrypoints/base.sh /tmp/entrypoint.sh
 RUN chmod 700 /tmp/entrypoint.sh
 RUN chown $USER /tmp/entrypoint.sh
-WORKDIR /
-RUN git clone -b master https://github.com/zancas/dotfiles.git
-RUN chmod -R 700 /dotfiles
-RUN chown -R $USER /dotfiles 
 WORKDIR /home/$USER
 RUN chown -R $USER /home/$USER
 ENTRYPOINT ["/tmp/entrypoint.sh"]
