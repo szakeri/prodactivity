@@ -4,14 +4,15 @@ REGISTRY='docker-registry.pdbld.f5net.com/prodactivity'
 BASEIMAGE_REGID=${REGISTRY}'/base'
 INSTALL_DIR=`python -c 'import os, prodactivity;print(\\
             os.path.dirname(os.path.abspath(prodactivity.__file__)))'`
-ENV_DIR=${INSTALL_DIR}/environments
+BASEDIR=${INSTALL_DIR}/environments/base
+USERDIR=${INSTALL_DIR}/environments/user
 
 if [ "$1" == "upgrade" ]; then
       sudo pip install --upgrade git+https://github.com/zancas/prodactivity.git
     elif [ "$1" == "base-publish" ]; then
       docker build --no-cache\
             -t ${BASEIMAGE_REGID}\
-            -f ${ENV_DIR}/base ${INSTALL_DIR}\
+            -f ${BASEDIR}/Dockerfile ${BASEDIR}\
       && docker push ${BASEIMAGE_REGID}
     elif [ "$1" == "self-publish" ]; then
       echo ${INSTALL_DIR}
@@ -20,7 +21,7 @@ if [ "$1" == "upgrade" ]; then
       docker build --no-cache --build-arg USER=${USER} \
                    --build-arg USER_ID=`id -u -r ${USER}` \
                    -t ${REGISTRY}/${USER} \
-                   -f ${ENV_DIR}/user ${INSTALL_DIR} \
+                   -f ${USERDIR}/Dockerfile ${USERDIR}\
       && docker push ${REGISTRY}/${USER}
     else
       docker run --user ${USER} -it -v ${HOME}:/home/${USER} \
