@@ -2,10 +2,7 @@ FROM ubuntu:16.10
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update &&\
     apt-get install -y\
-     man emacs mtr ssh make git python python-pip docker.io sudo vim tmux &&\
-    pip install --upgrade pip jinja2\
-     git+https://bldr-git.int.lineratesystems.com/tools/pytest-meta.git\
-     git+https://bldr-git.int.lineratesystems.com/tools/pytest-symbols.git\
-     git+https://bldr-git.int.lineratesystems.com/tools/pytest-autolog.git\
+     ssh make git python python-pip docker.io sudo &&\
+    pip install --upgrade pip 
      git+https://github.com/zancas/prodactivity.git &&\
     rm -rf /var/lib/apt/lists/*
