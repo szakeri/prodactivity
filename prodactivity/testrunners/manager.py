@@ -33,6 +33,8 @@ logger.addHandler(logging.StreamHandler())
 CTXT = os.path.abspath(os.path.dirname(__file__))
 REG_ID = 'docker-registry.pdbld.f5net.com/f5-openstack-test'
 TIMESTAMP = time.time()
+
+
 def render_dockerfile(**kwargs):
     infname = join(CTXT, kwargs['test_type'], 'project_docker.tmpl')
     outdir = join(CTXT, kwargs['test_type'], kwargs['project'])
@@ -43,11 +45,13 @@ def render_dockerfile(**kwargs):
         jinja2.Template(open(infname).read()).render(**kwargs)
     )
 
+
 def _publish_testrunner_container(registry_fullname):
     pubstring = "docker push {}".format(registry_fullname)
     logger.debug(pubstring)
     open(os.path.join(CTXT, 'registry_fullname'), 'w').write(registry_fullname)
     subprocess.check_call(pubstring.split())
+
 
 def _build_testrunner_container(project_dockerfile):
     '''Generate an image from the template and specification.'''
@@ -63,14 +67,14 @@ def _build_testrunner_container(project_dockerfile):
                     "-t {LOCALTAG} "
                     "-f {project_dockerfile} "
                     "{ctxt}".format(LOCALTAG=local_tag,
-                               project_dockerfile=project_dockerfile,
-                               ctxt=CTXT,
-                               **os.environ)
-                   )
+                                    project_dockerfile=project_dockerfile,
+                                    ctxt=CTXT,
+                                    **os.environ))
     logger.debug(build_string)
     subprocess.check_call(build_string.split())
     image_query = "docker images -q {}".format(local_tag)
     return subprocess.check_output(image_query.split()), local_tag
+
 
 def build_and_publish(test_type, project, branch, subjectcode_id):
     project_dockerfile = join(CTXT, test_type, project, 'Dockerfile')

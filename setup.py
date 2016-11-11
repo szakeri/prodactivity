@@ -15,12 +15,12 @@ setup(
     install_requires=[
             'jinja2 >= 2.8, < 3'
         ],
-    entry_points={'console_scripts':
-        ['publish_test_container=prodactivity.testrunners.manager:main']},
-    package_data ={'prodactivity':
-        ['testrunners/tempest/Dockerfile',
-         'testrunners/tempest/set_tempest_config.sh',
-         'testrunners/tempest/project_docker.tmpl',
-         'environments/*',
-         'entrypoints/*']}
+    entry_points={'console_scripts': [
+        'publish_test_container=prodactivity.testrunners.manager:main']},
+    package_data={'prodactivity': [
+        'testrunners/tempest/Dockerfile',
+        'testrunners/tempest/set_tempest_config.sh',
+        'testrunners/tempest/project_docker.tmpl',
+        'environments/*',
+        'entrypoints/*']}
 )
