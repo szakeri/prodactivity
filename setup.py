@@ -20,7 +20,7 @@ setup(
     package_data ={'prodactivity':
         ['testrunners/tempest/Dockerfile',
          'testrunners/tempest/set_tempest_config.sh',
-         'testrunners/temptest/project_docker.tmpl',
+         'testrunners/tempest/project_docker.tmpl',
          'environments/*',
          'entrypoints/*']}
 )
