@@ -18,8 +18,9 @@ setup(
     entry_points={'console_scripts':
         ['publish_test_container=prodactivity.testrunners.manager:main']},
     package_data ={'prodactivity':
-        ['testrunners/tempest/'+\
-         '{Dockerfile,set_tempest_config.sh,project_docker.tmpl}',
+        ['testrunners/tempest/Dockerfile',
+         'testrunners/tempest/set_tempest_config.sh',
+         'testrunners/temptest/project_docker.tmpl',
          'environments/*',
          'entrypoints/*']}
 )
