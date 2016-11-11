@@ -21,6 +21,6 @@ setup(
         'testrunners/tempest/Dockerfile',
         'testrunners/tempest/set_tempest_config.sh',
         'testrunners/tempest/project_docker.tmpl',
-        'environments/*',
-        'entrypoints/*']}
+        'environments/user/*',
+        'environments/base/*']}
 )

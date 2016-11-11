@@ -4,7 +4,7 @@ ARG USER_ID
 ENV USER_ID=$USER_ID
 ARG USER
 ENV USER=$USER
-COPY entrypoints/base.sh /tmp/entrypoint.sh
+COPY entrypoint.sh /tmp/entrypoint.sh
 RUN useradd $USER -u $USER_ID -G sudo,docker &&\
     echo $USER' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers &&\
     chmod 700 /tmp/entrypoint.sh && chown $USER /tmp/entrypoint.sh
