@@ -1,4 +1,4 @@
-FROM debian:latest
+FROM ubuntu:16.10
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y\
      docker.io \
