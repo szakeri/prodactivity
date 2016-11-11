@@ -8,6 +8,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y\
      python-pip \
      ssh \
      sudo &&\
-    pip install --upgrade pip 
-     git+https://github.com/zancas/prodactivity.git &&\
+    pip install --upgrade pip &&\
+    pip install --upgrade git+https://github.com/zancas/prodactivity.git &&\
     rm -rf /var/lib/apt/lists/*
