@@ -1,6 +1,7 @@
 DISCLAIMER
 ~~~~~~~~~~
- This project is still experimental.  It has only been tested against the 
+
+ This project is still experimental. It has only been tested against the 
 v2 api tempest tests in the lbaasv2-driver repository.  Many values that must
 be abstracted are currently hard-coded.
 
