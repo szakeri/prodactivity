@@ -17,9 +17,10 @@ the following properties:
     #. The tests are specified by a (routable) git repository and commit
     #. The TestRunner MUST have a route and permissions for a registry, that it can be published-to/pulled-from.
 
-How it works:
+How it works
+````````````
 
-  As a docker-style specification the TestRunner goes through a standard 
+As a docker-style specification the TestRunner goes through a standard 
 lifecycle.
 
 1 generic_template_of_dockerfile: A file with common Dockerfile logic.
