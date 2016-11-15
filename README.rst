@@ -2,14 +2,14 @@ DISCLAIMER
 ~~~~~~~~~~
 
 This project is still experimental. It has only been tested against the 
-v2 api tempest tests in the neutron-lbaas repository.  Many values that must
+v2 api tempest tests in the lbaasv2-driver repository.  Many values that must
 be abstracted are currently hard-coded.
 
 Components
-----------
+~~~~~~~~~~
 
 TestRunners
-~~~~~~~~~~~
+-----------
 A container designed to run and record a suite of tests with
 the following properties:
 
@@ -19,7 +19,7 @@ the following properties:
     #. The TestRunner MUST have a route and permissions for a registry, that it can be published-to/pulled-from.
 
 How it works
-~~~~~~~~~~~~
+------------
 
 As a docker-style specification the TestRunner goes through a standard 
 lifecycle.
@@ -65,7 +65,7 @@ Functions:
 by automated test infrastruct
 
 Prodactivity Workers
-~~~~~~~~~~~~~~~~~~~~
+--------------------
 
 These are called workers because they fulfill a role analogous to the role of
 the buildbot worker.
