@@ -63,8 +63,11 @@ Functions:
     1. TestRunner deginitions defining docker images via Dockerfiles, building, and pushing docker images to be used
 by automated test infrastruct
 
-Prodactivity
-~~~~~~~~~~~~
+Prodactivity Workers
+~~~~~~~~~~~~~~~~~~~~
+
+These are called workers because they fulfill a role analogous to the role of
+the buildbot worker.
 
 A lightweight development sandbox container with the following desiderata:
 
