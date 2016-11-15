@@ -46,16 +46,16 @@ def render_dockerfile(**kwargs):
     )
 
 
-def _publish_testrunner_container(registry_fullname):
+def _publish__container(registry_fullname):
     pubstring = "docker push {}".format(registry_fullname)
     logger.debug(pubstring)
     open(os.path.join(CTXT, 'registry_fullname'), 'w').write(registry_fullname)
     subprocess.check_call(pubstring.split())
 
 
-def _build_testrunner_container(project_dockerfile):
+def _build__container(project_dockerfile):
     '''Generate an image from the template and specification.'''
-    local_tag = "{:.0f}_testrunner".format(TIMESTAMP)
+    local_tag = "{:.0f}_".format(TIMESTAMP)
     build_string = ("docker build "
                     "--build-arg PUBLIC_ROUTER_ID={PUBLIC_ROUTER_ID} "
                     "--build-arg PUBLIC_NETWORK_ID={PUBLIC_NETWORK_ID} "
@@ -79,9 +79,9 @@ def _build_testrunner_container(project_dockerfile):
 def build_and_publish(test_type, project, branch, subjectcode_id):
     project_dockerfile = join(CTXT, test_type, project, 'Dockerfile')
     logger.debug(project_dockerfile)
-    image_id, local_tag = _build_testrunner_container(project_dockerfile)
+    image_id, local_tag = _build__container(project_dockerfile)
     user = subprocess.check_output('whoami'.split()).strip()
-    registry_fullname = "{reg}/{ttype}/{proj}/{brnch}/{githsh}/{user}/{image}"\
+    registry_fullname = "{reg}_{ttype}_{proj}_{brnch}_{githsh}_{user}_{image}"\
         .format(reg=REG_ID,
                 ttype=test_type,
                 proj=project,
@@ -93,7 +93,7 @@ def build_and_publish(test_type, project, branch, subjectcode_id):
     tag_command = "docker tag {LOCAL} {FULL}".format(LOCAL=local_tag,
                                                      FULL=registry_fullname)
     subprocess.check_call(tag_command.split())
-    _publish_testrunner_container(registry_fullname)
+    _publish__container(registry_fullname)
 
 
 def main():
