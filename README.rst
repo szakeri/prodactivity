@@ -81,4 +81,4 @@ by automated test infrastructure.
 How to Use
 ~~~~~~~~~~
 
-
+For the first POC use case see:  `docs/howtos/run_tempest_api_tests.rst`
