@@ -13,9 +13,9 @@ A container designed to run and record a suite of tests with
 the following properties:
 
   Requirements:
-    (#). The test infrastructure MUST be sufficient for ALL tests in the suite.
-    (#). The tests are specified by a (routable) git repository and commit
-    (#). The TestRunner MUST have a route and permissions for a registry, that
+    #. The test infrastructure MUST be sufficient for ALL tests in the suite.
+    #. The tests are specified by a (routable) git repository and commit
+    #. The TestRunner MUST have a route and permissions for a registry, that
 it can be published-to/pulled-from.
 
 How it works:
