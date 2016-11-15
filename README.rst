@@ -2,9 +2,7 @@ DISCLAIMER
 ~~~~~~~~~~
 
 This project is still experimental. It has only been tested against the
-v2 api tempest tests in the neutron-lbaas repository.  Many values that must
-
-be abstracted are currently hard-coded.
+v2 api tempest tests in the neutron-lbaas repository.  Many values that must be abstracted are currently hard-coded.
 
 Components
 ~~~~~~~~~~
@@ -62,8 +60,7 @@ Functions:
 Prodactivity Workers
 --------------------
 
-These are called workers because they fulfill a role analogous to the role of
-the buildbot worker.
+These are called workers because they fulfill a role analogous to the role of the buildbot worker.
 
 A lightweight development sandbox container with the following data:
 
