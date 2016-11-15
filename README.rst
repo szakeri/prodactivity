@@ -18,7 +18,7 @@ the following properties:
     #. The TestRunner MUST have a route and permissions for a registry, that it can be published-to/pulled-from.
 
 How it works
-````````````
+~~~~~~~~~~~~
 
 As a docker-style specification the TestRunner goes through a standard 
 lifecycle.
