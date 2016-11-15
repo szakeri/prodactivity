@@ -7,4 +7,5 @@ Clone the Subject Code
 #. Add ssh key "id_rsa_testlab" to ~/.ssh
 #. Add ssh key "id_rsa_bldrgit" to ~/.ssh
 #. pip install git+https://github.com/zancas/prodactivity.git
+#. prodactivity self-publish
 #. prodactivity

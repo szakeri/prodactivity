@@ -1,8 +1,14 @@
+DISCLAIMER
+~~~~~~~~~~
+ This project is still experimental.  It has only been tested against the 
+v2 api tempest tests in the lbaasv2-driver repository.  Many values that must
+be abstracted are currently hard-coded.
+
 Components
 ----------
 
-TestRunner
-~~~~~~~~~~
+TestRunners
+~~~~~~~~~~~
 A container designed to run and record a suite of tests with
 the following properties:
 
@@ -56,5 +62,23 @@ Functions:
 
     1. TestRunner deginitions defining docker images via Dockerfiles, building, and pushing docker images to be used
 by automated test infrastruct
+
+Prodactivity
+~~~~~~~~~~~~
+
+A lightweight development sandbox container with the following desiderata:
+
+ #. Transparent to host-system tools accessing files in the shared mounts
+ #. Replaces less-general sandboxing tools (e.g. virtualenv)
+ #. Provides an efficient mechanism for sharing test requirements among team
+members.
+ #. Provides a safe/easy/reproducible/shareable mechanism for experimenting
+with test/development processes.
+ #. Provides a test environment that is identical to the test environment used
+by automated test infrastructure.
+
+
+How to Use
+~~~~~~~~~~
 
 
