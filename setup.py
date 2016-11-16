@@ -13,7 +13,8 @@ setup(
     packages=find_packages(),
     scripts=['cli/prodactivity'],
     install_requires=[
-            'jinja2 >= 2.8, < 3'
+            'jinja2 >= 2.8, < 3',
+            'docker-py'
         ],
     entry_points={'console_scripts': [
         'publish_test_container=prodactivity.testrunners.manager:main',

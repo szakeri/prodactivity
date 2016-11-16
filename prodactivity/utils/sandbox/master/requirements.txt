@@ -1,0 +1,3 @@
+buildbot==0.8.12
+
+git+ssh://git@bldr-git.int.lineratesystems.com/tools/bbot-extras.git
