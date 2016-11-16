@@ -16,7 +16,8 @@ setup(
             'jinja2 >= 2.8, < 3'
         ],
     entry_points={'console_scripts': [
-        'publish_test_container=prodactivity.testrunners.manager:main']},
+        'publish_test_container=prodactivity.testrunners.manager:main',
+        'launchbox=prodactivity.utils.launchbox:main']},
     package_data={'prodactivity': [
         'testrunners/tempest/Dockerfile',
         'testrunners/tempest/set_tempest_config.sh',
