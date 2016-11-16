@@ -17,83 +17,11 @@
 
 '''library to create and use containers an environment with a local registry
 and a container orchestration environment'''
-
-import jinja2
-import logging
-import os
-from os.path import join
-import subprocess
 import sys
 import time
 
-logger = logging.getLogger()
-logger.setLevel(logging.DEBUG)
-logger.addHandler(logging.StreamHandler())
-
-CTXT = os.path.abspath(os.path.dirname(__file__))
-REG_ID = 'docker-registry.pdbld.f5net.com/f5-openstack-test'
-TIMESTAMP = time.time()
-
-
-def render_dockerfile(**kwargs):
-    infname = join(CTXT, kwargs['test_type'], 'project_docker.tmpl')
-    outdir = join(CTXT, kwargs['test_type'], kwargs['project'])
-    outfname = join(outdir, 'Dockerfile')
-    logging.debug('outfname: {}'.format(outfname))
-    logging.debug('CTXT: {}'.format(CTXT))
-    open(outfname, 'w').write(
-        jinja2.Template(open(infname).read()).render(**kwargs)
-    )
-
-
-def _publish__container(registry_fullname):
-    pubstring = "docker push {}".format(registry_fullname)
-    logger.debug(pubstring)
-    open(os.path.join(CTXT, 'registry_fullname'), 'w').write(registry_fullname)
-    subprocess.check_call(pubstring.split())
-
-
-def _build__container(project_dockerfile):
-    '''Generate an image from the template and specification.'''
-    local_tag = "{:.0f}_".format(TIMESTAMP)
-    build_string = ("docker build "
-                    "--build-arg PUBLIC_ROUTER_ID={PUBLIC_ROUTER_ID} "
-                    "--build-arg PUBLIC_NETWORK_ID={PUBLIC_NETWORK_ID} "
-                    "--build-arg OS_AUTH_URL={OS_AUTH_URL} "
-                    "--build-arg OS_AUTH_URL_V3={OS_AUTH_URL_V3} "
-                    "--build-arg OS_TENANT_ID={OS_TENANT_ID} "
-                    "--build-arg ICONTROL_IPADDR={ICONTROL_IPADDR} "
-                    "--build-arg CONTROLLER_IPADDR={CONTROLLER_IPADDR} "
-                    "-t {LOCALTAG} "
-                    "-f {project_dockerfile} "
-                    "{ctxt}".format(LOCALTAG=local_tag,
-                                    project_dockerfile=project_dockerfile,
-                                    ctxt=CTXT,
-                                    **os.environ))
-    logger.debug(build_string)
-    subprocess.check_call(build_string.split())
-    image_query = "docker images -q {}".format(local_tag)
-    return subprocess.check_output(image_query.split()), local_tag
-
-
-def build_and_publish(test_type, project, branch, subjectcode_id):
-    project_dockerfile = join(CTXT, test_type, project, 'Dockerfile')
-    logger.debug(project_dockerfile)
-    image_id, local_tag = _build__container(project_dockerfile)
-    user = subprocess.check_output('whoami'.split()).strip()
-    registry_fullname = "{reg}_{ttype}_{proj}_{brnch}_{githsh}_{user}_{image}"\
-        .format(reg=REG_ID,
-                ttype=test_type,
-                proj=project,
-                brnch=branch,
-                githsh=subjectcode_id,
-                user=user,
-                image=image_id)
-    logger.debug('registry_fullname: {}'.format(registry_fullname))
-    tag_command = "docker tag {LOCAL} {FULL}".format(LOCAL=local_tag,
-                                                     FULL=registry_fullname)
-    subprocess.check_call(tag_command.split())
-    _publish__container(registry_fullname)
+from prodactivity.utils.dockerlib import render_dockerfile
+from prodactivity.utils.dockerlib import build_and_publish
 
 
 def main():
@@ -105,7 +33,8 @@ def main():
     build_and_publish(test_type=sys.argv[1],
                       project=sys.argv[2],
                       branch=sys.argv[3],
-                      subjectcode_id=sys.argv[4])
+                      subjectcode_id=sys.argv[4],
+                      time.time())
 
 if __name__ == '__main__':
     main()
