@@ -55,7 +55,7 @@ def _publish__container(registry_fullname):
 
 def _build__container(project_dockerfile):
     '''Generate an image from the template and specification.'''
-    local_tag = "{:.0f}_".format(TIMESTAMP)
+    local_tag = "{:.0f}".format(TIMESTAMP)
     build_string = ("docker build "
                     "--build-arg PUBLIC_ROUTER_ID={PUBLIC_ROUTER_ID} "
                     "--build-arg PUBLIC_NETWORK_ID={PUBLIC_NETWORK_ID} "
