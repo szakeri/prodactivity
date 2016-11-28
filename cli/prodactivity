@@ -25,6 +25,7 @@ if [ "$1" == "upgrade" ]; then
       && docker push ${REGISTRY}/${USER}
     else
       docker run --user ${USER} -it -v ${HOME}:/home/${USER} \
+      -e TESTENV_PATH="/usr/local/share/testenv" \
       -v /var/run/docker.sock:/var/run/docker.sock \
       -v ${HOME}/.ssh/id_rsa_bldrgit:/home/$USER/ssh_keys/id_rsa_bldrgit \
       -v ${HOME}/.ssh/id_rsa_testlab:/home/$USER/ssh_keys/id_rsa_testlab \
