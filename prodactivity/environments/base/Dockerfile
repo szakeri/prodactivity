@@ -10,6 +10,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y\
      sudo &&\
     pip install --upgrade pip &&\
     pip install --upgrade git+https://github.com/zancas/prodactivity.git &&\
-    pip install --upgrade git+git@bldr-git.int.lineratesystems.com:tools/testenv.git &&\
-    pip install --upgrade git+git@bldr-git.int.lineratesystems.com:velcro/systest-common.git &&\
+    pip install --upgrade git+https://bldr-git.int.lineratesystems.com/tools/testenv.git &&\
+    pip install --upgrade git+https://bldr-git.int.lineratesystems.com/velcro/systest-common.git &&\
     rm -rf /var/lib/apt/lists/*
