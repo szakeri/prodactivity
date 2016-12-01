@@ -36,14 +36,16 @@ TIMESTAMP = time.time()
 
 
 def render_dockerfile(**kwargs):
-    infname = join(CTXT, kwargs['test_type'], 'project_docker.tmpl')
-    outdir = join(CTXT, kwargs['test_type'], kwargs['project'])
-    outfname = join(outdir, 'Dockerfile')
+    '''create a Dockerfile from a template and kwargs'''
+    datadir = join(CTXT, kwargs['test_type'])
+    infname = join(datadir, 'project_docker.tmpl')
+    outfname = join(datadir, 'Dockerfile')
     logging.debug('outfname: {}'.format(outfname))
     logging.debug('CTXT: {}'.format(CTXT))
     open(outfname, 'w').write(
         jinja2.Template(open(infname).read()).render(**kwargs)
     )
+    return outfname
 
 
 def _publish__container(registry_fullname):
@@ -53,7 +55,7 @@ def _publish__container(registry_fullname):
     subprocess.check_call(pubstring.split())
 
 
-def _build__container(project_dockerfile):
+def _build__container(project_dockerfile_path):
     '''Generate an image from the template and specification.'''
     local_tag = "{:.0f}".format(TIMESTAMP)
     build_string = ("docker build "
@@ -65,9 +67,9 @@ def _build__container(project_dockerfile):
                     "--build-arg ICONTROL_IPADDR={ICONTROL_IPADDR} "
                     "--build-arg CONTROLLER_IPADDR={CONTROLLER_IPADDR} "
                     "-t {LOCALTAG} "
-                    "-f {project_dockerfile} "
+                    "-f {project_dockerfile_path} "
                     "{ctxt}".format(LOCALTAG=local_tag,
-                                    project_dockerfile=project_dockerfile,
+                                    project_dockerfile_path=project_dockerfile_path,
                                     ctxt=CTXT,
                                     **os.environ))
     logger.debug(build_string)
@@ -76,10 +78,13 @@ def _build__container(project_dockerfile):
     return subprocess.check_output(image_query.split()), local_tag
 
 
-def build_and_publish(test_type, project, branch, subjectcode_id):
-    project_dockerfile = join(CTXT, test_type, project, 'Dockerfile')
-    logger.debug(project_dockerfile)
-    image_id, local_tag = _build__container(project_dockerfile)
+def build_and_publish(test_type,
+                      project,
+                      branch,
+                      subjectcode_id,
+                      project_dockerfile_path):
+    logger.debug(project_dockerfile_path)
+    image_id, local_tag = _build__container(project_dockerfile_path)
     user = subprocess.check_output('whoami'.split()).strip()
     registry_fullname = "{reg}_{ttype}_{proj}_{brnch}_{githsh}_{user}_{image}"\
         .format(reg=REG_ID,
@@ -97,15 +102,16 @@ def build_and_publish(test_type, project, branch, subjectcode_id):
 
 
 def main():
-    render_dockerfile(test_type=sys.argv[1],
-                      project=sys.argv[2],
-                      branch=sys.argv[3],
-                      registry_project_name=REG_ID,
-                      timestamp=TIMESTAMP)
+    project_dockerfile_path = render_dockerfile(test_type=sys.argv[1],
+                                                project=sys.argv[2],
+                                                branch=sys.argv[3],
+                                                registry_project_name=REG_ID,
+                                                timestamp=TIMESTAMP)
     build_and_publish(test_type=sys.argv[1],
                       project=sys.argv[2],
                       branch=sys.argv[3],
-                      subjectcode_id=sys.argv[4])
+                      subjectcode_id=sys.argv[4],
+                      project_dockerfile_path=project_dockerfile_path)
 
 if __name__ == '__main__':
     main()

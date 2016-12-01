@@ -52,8 +52,6 @@ RUN pip install -r neutron-lbaas/test-requirements.txt
 RUN git clone https://github.com/openstack/tempest.git
 RUN pip install ./tempest 
 
-
-
 RUN mkdir -p /etc/tempest
 COPY ./tempest/config-files/accounts.yaml /etc/tempest/
 COPY ./tempest/config-files/tempest.conf /etc/tempest/
