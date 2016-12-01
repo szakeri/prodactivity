@@ -65,6 +65,7 @@ def _build__container(project_dockerfile_path):
                     "--build-arg OS_AUTH_URL_V3={OS_AUTH_URL_V3} "
                     "--build-arg OS_TENANT_ID={OS_TENANT_ID} "
                     "--build-arg ICONTROL_IPADDR={ICONTROL_IPADDR} "
+                    "--build-arg IMAGE_REF={IMAGE_REF}"
                     "--build-arg CONTROLLER_IPADDR={CONTROLLER_IPADDR} "
                     "-t {LOCALTAG} "
                     "-f {project_dockerfile_path} "

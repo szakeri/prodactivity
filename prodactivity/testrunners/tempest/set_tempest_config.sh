@@ -21,6 +21,7 @@ crudini --set $TEMPEST_CONF identity uri $OS_AUTH_URL
 crudini --set $TEMPEST_CONF identity uri_v3 $OS_AUTH_URL_V3
 crudini --set $TEMPEST_CONF auth admin_tenant_id $OS_TENANT_ID
 crudini --set $TEMPEST_CONF f5_lbaasv2_driver icontrol_hostname $ICONTROL_IPADDR
+crudini --set $TEMPEST_CONF compute image_ref $IMAGE_REF
 crudini --set $TEMPEST_CONF f5_lbaasv2_driver icontrol_username admin
 crudini --set $TEMPEST_CONF f5_lbaasv2_driver icontrol_password admin
 crudini --set $TEMPEST_CONF f5_lbaasv2_driver transport_url rabbit://guest:guest@$CONTROLLER_IPADDR:5672/
